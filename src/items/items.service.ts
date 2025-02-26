@@ -18,12 +18,13 @@ export class ItemsService {
     return await this.itemsRepository.save(newItem);
   }
 
-  findAll() {
-    return [];
+  async findAll(): Promise<Item[]> {
+    return await this.itemsRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} item`;
+  async findOne(id: string):Promise<Item>{
+    const itemT = await this.itemsRepository.findOne({ where: { id }});
+    return  itemT;
   }
 
   update(id: number, updateItemInput: UpdateItemInput) {

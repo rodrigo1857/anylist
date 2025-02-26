@@ -10,8 +10,8 @@ type Item {
 }
 
 type Query {
-  items: [Item!]!
-  item(id: Int!): Item!
+  findAll: [Item!]!
+  findOne(id: String!): Item!
 }
 
 type Mutation {

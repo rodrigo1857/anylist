@@ -3,6 +3,7 @@ import { ItemsService } from './items.service';
 import { Item } from './entities/item.entity';
 import { CreateItemInput } from './dto/create-item.input';
 import { UpdateItemInput } from './dto/update-item.input';
+import { ParseUUIDPipe } from '@nestjs/common';
 
 @Resolver(() => Item)
 export class ItemsResolver {
@@ -15,13 +16,13 @@ export class ItemsResolver {
     return this.itemsService.create(createItemInput);
   }
 
-  @Query(() => [Item], { name: 'items' })
+  @Query(() => [Item], { name: 'findAll' })
   findAll() {
     return this.itemsService.findAll();
   }
 
-  @Query(() => Item, { name: 'item' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => Item, { name: 'findOne' })
+  findOne(@Args('id', ParseUUIDPipe) id: string) {
     return this.itemsService.findOne(id);
   }
 
